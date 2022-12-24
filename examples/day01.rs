@@ -43,8 +43,7 @@ fn main() {
 mod tests {
     use super::*;
 
-    const TEST_INPUT: &str =
-r"1000
+    const TEST_INPUT: &str = r"1000
 2000
 3000
 
