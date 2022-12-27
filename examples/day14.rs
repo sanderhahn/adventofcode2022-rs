@@ -57,8 +57,8 @@ fn rocks(sandbox: &mut SandBox, start: &str, end: &str) {
     draw_rocks(sandbox, &start, &end);
 }
 
-fn is_empty(sandbox: &SandBox, position: &Position) -> bool {
-    let cell = sandbox[position[1]][position[0]];
+fn is_empty(sandbox: &SandBox, x: usize, y: usize) -> bool {
+    let cell = sandbox[y][x];
     cell == Cell::Air
 }
 
@@ -69,12 +69,12 @@ fn simulate_sand(sandbox: &mut SandBox) -> usize {
         if position[1] + 1 == sandbox.len() {
             return sand_to_rest;
         }
-        if is_empty(sandbox, &vec![position[0], position[1] + 1]) {
+        if is_empty(sandbox, position[0], position[1] + 1) {
             position[1] += 1;
-        } else if is_empty(sandbox, &vec![position[0] - 1, position[1] + 1]) {
+        } else if is_empty(sandbox, position[0] - 1, position[1] + 1) {
             position[0] -= 1;
             position[1] += 1;
-        } else if is_empty(sandbox, &vec![position[0] + 1, position[1] + 1]) {
+        } else if is_empty(sandbox, position[0] + 1, position[1] + 1) {
             position[0] += 1;
             position[1] += 1;
         } else {
@@ -82,7 +82,7 @@ fn simulate_sand(sandbox: &mut SandBox) -> usize {
             // print_sandbox(&sandbox);
             sand_to_rest += 1;
             position = vec![500, 0];
-            if ! is_empty(sandbox, &position) {
+            if ! is_empty(sandbox, position[0], position[1]) {
                 return sand_to_rest;
             }
         }
